@@ -313,6 +313,30 @@ def create_setup_and_compute(
                 "8x256",
                 "8x512",
                 "8x1024",
+                "32x8",
+                "32x64",
+                "32x128",
+                "32x256",
+                "32x512",
+                "32x1024",
+                "64x8",
+                "64x64",
+                "64x128",
+                "64x256",
+                "64x512",
+                "64x1024",
+                "128x8",
+                "128x64",
+                "128x128",
+                "128x256",
+                "128x512",
+                "128x1024",
+                "256x8",
+                "256x64",
+                "256x128",
+                "256x256",
+                "256x512",
+                "256x1024",
             ]
 
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
@@ -337,7 +361,7 @@ def _compute_pytorch(model_names, dictionary, average_over, device, torchscript,
         tokenized_sequence = tokenizer.encode(input_text, add_special_tokens=False)
 
         max_input_size = tokenizer.max_model_input_sizes[model_name]
-        batch_sizes = [1, 2, 4, 8]
+        batch_sizes = [1, 2, 4, 8, 32, 64, 128, 256]
         slice_sizes = [8, 64, 128, 256, 512, 1024]
 
         dictionary[model_name] = {"bs": batch_sizes, "ss": slice_sizes, "results": {}}
@@ -383,7 +407,7 @@ def _compute_tensorflow(model_names, dictionary, average_over, amp):
         tokenized_sequence = tokenizer.encode(input_text, add_special_tokens=False)
 
         max_input_size = tokenizer.max_model_input_sizes[model_name]
-        batch_sizes = [1, 2, 4, 8]
+        batch_sizes = [1, 2, 4, 8, 32, 64, 128, 256]
         slice_sizes = [8, 64, 128, 256, 512, 1024]
 
         dictionary[model_name] = {"bs": batch_sizes, "ss": slice_sizes, "results": {}}
